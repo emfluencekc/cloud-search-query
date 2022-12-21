@@ -36,8 +36,9 @@ class CloudSearchQueryResults
 
     public function map()
     {
-        $this->status = $this->awsResult['@metadata']['statusCode'];
-        if ($this->status == '200') {
+        $resultStatus = $this->awsResult['@metadata']['statusCode'];
+        if ($resultStatus == '200') {
+          $this->status = $this->awsResult['status'];
           $this->found = $this->awsResult['hits']['found'];
           $this->start = $this->awsResult['hits']['start'];
           if (isset($this->awsResult['hits']['cursor'])) {
